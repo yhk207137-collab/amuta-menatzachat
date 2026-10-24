@@ -40,6 +40,8 @@
     const url = location.origin + location.pathname + '?src=share';
     done.querySelector('[data-share]').href = 'https://wa.me/?text=' + encodeURIComponent('מצאתי מייל שבועי קצר עם כלים אמיתיים לשיווק, פרסום וגיוס כספים לעמותות. שווה להצטרף: ' + url);
     done.hidden = false; done.focus({ preventScroll: true });
+    const r = done.getBoundingClientRect();
+    if (r.top < 70 || r.bottom > innerHeight) window.scrollBy({ top: r.top - 90, behavior: 'smooth' });
     if (window.stageCelebrate) window.stageCelebrate(name);
   }
 
