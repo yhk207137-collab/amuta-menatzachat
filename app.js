@@ -1,7 +1,7 @@
 /* Sign-up form → Google Sheet (via Apps Script web app), scroll reveals, sticky CTA. */
 (function () {
   // Apps Script web-app URL (Deploy → Web app → URL ending in /exec)
-  const ENDPOINT = '';
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyFUd9tqSYrMLyESupMnim3WPqR7NYX4tC6zbeNpuh9QOF0Hil6xjjPtKsa3J7ocom3NQ/exec';
 
   const form = document.querySelector('[data-form]');
   const done = document.querySelector('[data-done]');
