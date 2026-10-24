@@ -5,3 +5,8 @@ assets/hand*.png
 assets/box.png
 assets/logo-src.png
 assets/geo.json
+
+# design experiments stay local, not on the live site
+design-preview*
+design-qa/
+COORDINATION-CLAUDE-CODEX.md
