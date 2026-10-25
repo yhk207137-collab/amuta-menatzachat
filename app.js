@@ -1,7 +1,10 @@
-/* Sign-up form → Google Sheet (via Apps Script web app), scroll reveals, sticky CTA. */
+/* Sign-up form → CRM contacts + Google Sheet backup (via Apps Script web app), scroll reveals, sticky CTA. */
 (function () {
   // Apps Script web-app URL (Deploy → Web app → URL ending in /exec)
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyFUd9tqSYrMLyESupMnim3WPqR7NYX4tC6zbeNpuh9QOF0Hil6xjjPtKsa3J7ocom3NQ/exec';
+  // The CRM's mailing list (contacts + welcome email)
+  const CRM_ENDPOINT = 'https://coach-app-production-908f.up.railway.app/api/public/subscribe';
+  const LIST = 'המדריך לעמותה מנצחת';
 
   const form = document.querySelector('[data-form]');
   const done = document.querySelector('[data-done]');
@@ -55,11 +58,16 @@
     if (form.elements.website.value) return showDone(name); // bot
     sending = true; btn.setAttribute('aria-busy', 'true'); errBox.hidden = true;
     try {
-      if (!ENDPOINT) throw new Error('no-endpoint');
-      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200) });
-      const res = await fetch(ENDPOINT, { method: 'POST', body });
-      const data = await res.json().catch(() => ({ ok: res.ok }));
-      if (!data.ok) throw new Error(data.error || 'failed');
+      const consent = form.querySelector('.fine') ? form.querySelector('.fine').textContent.trim() : '';
+      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent });
+      const post = async (url) => {
+        const res = await fetch(url, { method: 'POST', body });
+        const data = await res.json().catch(() => ({ ok: res.ok }));
+        if (!data.ok) throw new Error(data.error || 'failed');
+      };
+      // Either destination is enough; the other one is a backup.
+      const results = await Promise.allSettled([post(CRM_ENDPOINT), post(ENDPOINT)]);
+      if (!results.some((r) => r.status === 'fulfilled')) throw new Error('failed');
       try { localStorage.setItem('signedUp', name); } catch (_) {}
       showDone(name);
     } catch (err) {
