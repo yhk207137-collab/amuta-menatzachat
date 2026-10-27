@@ -31,6 +31,8 @@
   }
   emailIn.addEventListener('blur', suggest);
   [nameIn, emailIn].forEach(i => i.addEventListener('input', () => { i.removeAttribute('aria-invalid'); errBox.hidden = true; }));
+  const agreeIn = form.elements.agree, consentLabel = form.querySelector('.consent');
+  agreeIn.addEventListener('change', () => { consentLabel.removeAttribute('aria-invalid'); errBox.hidden = true; });
 
   function fail(msg, field) {
     errBox.textContent = msg; errBox.hidden = false;
@@ -55,11 +57,16 @@
     const name = nameIn.value.trim().replace(/\s+/g, ' '), email = emailIn.value.trim().toLowerCase();
     if (name.length < 2) return fail('נא לכתוב שם מלא', nameIn);
     if (!EMAIL_RE.test(email)) return fail('נראה שכתובת המייל לא תקינה', emailIn);
+    if (!agreeIn.checked) {
+      consentLabel.setAttribute('aria-invalid', 'true');
+      return fail('כדי להירשם צריך לסמן את תיבת האישור לקבלת המייל', agreeIn);
+    }
     if (form.elements.website.value) return showDone(name); // bot
     sending = true; btn.setAttribute('aria-busy', 'true'); errBox.hidden = true;
     try {
-      const consent = form.querySelector('.fine') ? form.querySelector('.fine').textContent.trim() : '';
-      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent });
+      // The exact wording the person agreed to is stored with their contact as proof of consent.
+      const consent = form.querySelector('[data-consent-text]').textContent.replace(/\s+/g, ' ').trim();
+      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes' });
       const post = async (url) => {
         const res = await fetch(url, { method: 'POST', body });
         const data = await res.json().catch(() => ({ ok: res.ok }));

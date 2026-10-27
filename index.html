@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=consent1">
 </head>
 <body>
 
@@ -48,8 +48,12 @@
           <p class="hint" data-hint hidden></p>
         </div>
         <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent">
+          <input type="checkbox" name="agree" value="yes">
+          <span data-consent-text>אני מאשר/ת לקבל מיהושע כהן את המייל השבועי "המדריך לעמותה מנצחת", הכולל תוכן מקצועי וגם דברי פרסומת. אפשר להסיר בכל רגע בלחיצה על "הסרה" בתחתית כל מייל.</span>
+        </label>
         <button type="submit" class="btn"><span>אני רוצה עמותה מנצחת</span></button>
-        <p class="fine">בהרשמה אני מאשר/ת לקבל את המייל השבועי. אפשר להסיר בכל רגע.</p>
+        <p class="fine">הפרטים שלך ישמשו רק לשליחת הדיוור, ולא יועברו לאף אחד.</p>
         <p class="error" role="alert" data-error hidden></p>
       </form>
 
@@ -128,6 +132,6 @@
 <a class="sticky-cta" href="#join" data-sticky>אני רוצה עמותה מנצחת</a>
 
 <script src="stage.js"></script>
-<script src="app.js?v=crm1"></script>
+<script src="app.js?v=consent1"></script>
 </body>
 </html>

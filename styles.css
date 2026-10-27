@@ -64,6 +64,10 @@ h1 em{display:block;font-size:1.32em;line-height:1.02}
 .btn[aria-busy=true]::before{content:"";position:absolute;width:24px;height:24px;border-radius:50%;border:3px solid var(--navy);border-left-color:transparent;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .fine{margin:12px 4px 0;font-size:13px;color:var(--muted);text-align:center}
+.consent{display:flex;align-items:flex-start;gap:10px;margin:2px 4px 16px;font-size:14px;line-height:1.55;color:var(--muted);cursor:pointer}
+.consent input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--teal);cursor:pointer}
+.consent[aria-invalid=true]{color:#a12a25}
+.consent[aria-invalid=true] input{outline:2px solid #d9534f;outline-offset:2px;border-radius:4px}
 .error{margin:10px 0 0;padding:10px 14px;border-radius:12px;background:#fdecea;color:#a12a25;font-weight:700;font-size:15px}
 
 .done{text-align:center;padding:30px 22px;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
