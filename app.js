@@ -15,6 +15,26 @@
   const qs = new URLSearchParams(location.search);
   const source = qs.get('src') || qs.get('utm_source') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
 
+  // Visit counter for the CRM's tracking page: one tiny image per page view. The random browser id
+  // lets a later sign-up, or an email link (ys=), attach these visits to the right contact.
+  const VISIT_PIXEL = 'https://coach-app-production-908f.up.railway.app/api/t/v.gif';
+  const newId = () => [...crypto.getRandomValues(new Uint8Array(12))].map(b => b.toString(36).padStart(2, '0')).join('');
+  let vid;
+  try {
+    vid = localStorage.getItem('vid');
+    if (!/^[A-Za-z0-9_-]{8,40}$/.test(vid || '')) { vid = newId(); localStorage.setItem('vid', vid); }
+  } catch (_) { vid = newId(); }
+  const fromEmail = qs.get('ys') || '';
+  if (fromEmail) { // keep the email's id out of links people copy and share
+    qs.delete('ys');
+    history.replaceState(null, '', location.pathname + (qs.toString() ? '?' + qs : '') + location.hash);
+  }
+  const refHost = document.referrer ? new URL(document.referrer).hostname : '';
+  new Image().src = VISIT_PIXEL + '?' + new URLSearchParams({
+    v: vid, p: location.host + location.pathname, s: qs.get('src') || qs.get('utm_source') || '',
+    r: refHost === location.hostname ? '' : refHost, e: fromEmail, t: Date.now(),
+  });
+
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   // common typos → suggestion
   const FIX = { 'gmial.com': 'gmail.com', 'gmai.com': 'gmail.com', 'gmail.co': 'gmail.com', 'gamil.com': 'gmail.com', 'gmail.con': 'gmail.com', 'gmal.com': 'gmail.com',
@@ -66,7 +86,7 @@
     try {
       // The exact wording the person agreed to is stored with their contact as proof of consent.
       const consent = form.querySelector('[data-consent-text]').textContent.replace(/\s+/g, ' ').trim();
-      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes' });
+      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes', vid });
       const post = async (url) => {
         const res = await fetch(url, { method: 'POST', body });
         const data = await res.json().catch(() => ({ ok: res.ok }));
