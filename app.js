@@ -97,6 +97,7 @@
       if (!results.some((r) => r.status === 'fulfilled')) throw new Error('failed');
       try { localStorage.setItem('signedUp', name); } catch (_) {}
       showDone(name);
+      setTimeout(() => location.assign('thank-you.html'), 3000); // time to read the success message
     } catch (err) {
       fail('משהו השתבש בשליחה. נסו שוב בעוד רגע, או שלחו לי הודעה בוואטסאפ: 050-4167903');
     } finally {
