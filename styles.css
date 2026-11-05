@@ -49,6 +49,7 @@ h1 em{display:block;font-size:1.2em;line-height:1.05}
 .form-title{margin:0 4px 14px;font-size:21px;font-weight:900}
 .field{margin-bottom:14px}
 .field label{display:block;font-weight:900;font-size:15px;margin:0 4px 6px}
+.field label .opt{font-weight:400;font-size:13.5px;color:#7a8596}
 .field input{width:100%;font:inherit;font-size:18px;font-weight:700;color:var(--ink);padding:15px 16px;border-radius:16px;border:2px solid var(--line);background:#fbfbfa;transition:border-color .2s,box-shadow .2s,background .2s}
 .field input[dir=ltr]{text-align:left}
 .field input::placeholder{color:#a5aebb;font-weight:400}

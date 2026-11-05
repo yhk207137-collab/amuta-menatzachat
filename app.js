@@ -11,7 +11,7 @@
   const errBox = form.querySelector('[data-error]');
   const hint = form.querySelector('[data-hint]');
   const btn = form.querySelector('button[type=submit]');
-  const nameIn = form.elements.name, emailIn = form.elements.email;
+  const nameIn = form.elements.name, emailIn = form.elements.email, phoneIn = form.elements.phone;
   const qs = new URLSearchParams(location.search);
   const source = qs.get('src') || qs.get('utm_source') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
 
@@ -50,7 +50,21 @@
     hint.hidden = false;
   }
   emailIn.addEventListener('blur', suggest);
-  [nameIn, emailIn].forEach(i => i.addEventListener('input', () => { i.removeAttribute('aria-invalid'); errBox.hidden = true; }));
+
+  // Phone is optional. A filled number gets a light check for an Israeli number; one that doesn't
+  // look right is pointed out once, and a second click sends it as typed, so it never blocks a sign-up.
+  const ISRAELI_PHONE = /^(?:\+?972|0)(5\d{8}|7\d{8}|[23489]\d{7})$/;
+  function phoneValue() {
+    const raw = phoneIn.value.trim();
+    if (!raw) return { value: '', ok: true };
+    const m = raw.replace(/[\s\-().]/g, '').match(ISRAELI_PHONE);
+    if (!m) return { value: raw.slice(0, 20), ok: false };
+    const n = '0' + m[1]; // 0501234567 → 050-1234567, 021234567 → 02-1234567
+    return { value: n.length === 10 ? n.slice(0, 3) + '-' + n.slice(3) : n.slice(0, 2) + '-' + n.slice(2), ok: true };
+  }
+  let phoneWarned = null;
+
+  [nameIn, emailIn, phoneIn].forEach(i => i.addEventListener('input', () => { i.removeAttribute('aria-invalid'); errBox.hidden = true; }));
   const agreeIn = form.elements.agree, consentLabel = form.querySelector('.consent');
   agreeIn.addEventListener('change', () => { consentLabel.removeAttribute('aria-invalid'); errBox.hidden = true; });
 
@@ -80,12 +94,18 @@
       consentLabel.setAttribute('aria-invalid', 'true');
       return fail('כדי לקבל את המדריך צריך לסמן את תיבת האישור', agreeIn);
     }
+    const phone = phoneValue();
+    if (!phone.ok && phoneWarned !== phone.value) {
+      phoneWarned = phone.value;
+      return fail('המספר לא נראה כמו טלפון ישראלי. אפשר לתקן אותו, למחוק אותו, או ללחוץ שוב כדי לשלוח כמו שהוא.', phoneIn);
+    }
+    if (phone.ok && phone.value) phoneIn.value = phone.value;
     if (form.elements.website.value) return showDone(name); // bot
     sending = true; btn.setAttribute('aria-busy', 'true'); errBox.hidden = true;
     try {
       // The exact wording the person agreed to is stored with their contact as proof of consent.
       const consent = form.querySelector('[data-consent-text]').textContent.replace(/\s+/g, ' ').trim();
-      const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes', vid });
+      const body = new URLSearchParams({ name, email, phone: phone.value, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes', vid });
       const post = async (url) => {
         // keepalive: the slower one keeps going after the page has moved on.
         const res = await fetch(url, { method: 'POST', body, keepalive: true });
