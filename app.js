@@ -87,13 +87,16 @@
       const consent = form.querySelector('[data-consent-text]').textContent.replace(/\s+/g, ' ').trim();
       const body = new URLSearchParams({ name, email, source, page: location.href.slice(0, 200), list: LIST, consent, agree: 'yes', vid });
       const post = async (url) => {
-        const res = await fetch(url, { method: 'POST', body });
+        // keepalive: the slower one keeps going after the page has moved on.
+        const res = await fetch(url, { method: 'POST', body, keepalive: true });
         const data = await res.json().catch(() => ({ ok: res.ok }));
         if (!data.ok) throw new Error(data.error || 'failed');
       };
-      // Either destination is enough; the other one is a backup.
-      const results = await Promise.allSettled([post(CRM_ENDPOINT), post(ENDPOINT)]);
-      if (!results.some((r) => r.status === 'fulfilled')) throw new Error('failed');
+      // Either destination is enough, so the next page comes up as soon as the first one confirms.
+      await new Promise((resolve, reject) => {
+        let left = 2;
+        [post(CRM_ENDPOINT), post(ENDPOINT)].forEach((sent) => sent.then(resolve, () => { if (--left === 0) reject(new Error('failed')); }));
+      });
       try { localStorage.setItem('signedUp', name); } catch (_) {}
       location.assign('thank-you.html');
     } catch (err) {
