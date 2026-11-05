@@ -1,4 +1,4 @@
-/* Sign-up form → CRM contacts + Google Sheet backup (via Apps Script web app), scroll reveals, sticky CTA. */
+/* Guide sign-up form → CRM contacts + Google Sheet backup (via Apps Script web app), scroll reveals, sticky CTA. */
 (function () {
   // Apps Script web-app URL (Deploy → Web app → URL ending in /exec)
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyFUd9tqSYrMLyESupMnim3WPqR7NYX4tC6zbeNpuh9QOF0Hil6xjjPtKsa3J7ocom3NQ/exec';
@@ -63,11 +63,10 @@
     form.hidden = true;
     done.querySelector('[data-done-name]').textContent = name.split(' ')[0] || name;
     const url = location.origin + location.pathname + '?src=share';
-    done.querySelector('[data-share]').href = 'https://wa.me/?text=' + encodeURIComponent('מצאתי מייל שבועי קצר עם כלים אמיתיים לשיווק, פרסום וגיוס כספים לעמותות. שווה להצטרף: ' + url);
+    done.querySelector('[data-share]').href = 'https://wa.me/?text=' + encodeURIComponent('מצאתי מדריך חינם למנהלי עמותות: איך להפסיק לכבות שריפות, להפוך תורמים לשותפים אמיתיים ולבנות עמותה יציבה ומסודרת. שווה לקבל: ' + url);
     done.hidden = false; done.focus({ preventScroll: true });
     const r = done.getBoundingClientRect();
     if (r.top < 70 || r.bottom > innerHeight) window.scrollBy({ top: r.top - 90, behavior: 'smooth' });
-    if (window.stageCelebrate) window.stageCelebrate(name);
   }
 
   let sending = false;
@@ -79,7 +78,7 @@
     if (!EMAIL_RE.test(email)) return fail('נראה שכתובת המייל לא תקינה', emailIn);
     if (!agreeIn.checked) {
       consentLabel.setAttribute('aria-invalid', 'true');
-      return fail('כדי להירשם צריך לסמן את תיבת האישור לקבלת המייל', agreeIn);
+      return fail('כדי לקבל את המדריך צריך לסמן את תיבת האישור', agreeIn);
     }
     if (form.elements.website.value) return showDone(name); // bot
     sending = true; btn.setAttribute('aria-busy', 'true'); errBox.hidden = true;
@@ -96,8 +95,7 @@
       const results = await Promise.allSettled([post(CRM_ENDPOINT), post(ENDPOINT)]);
       if (!results.some((r) => r.status === 'fulfilled')) throw new Error('failed');
       try { localStorage.setItem('signedUp', name); } catch (_) {}
-      showDone(name);
-      setTimeout(() => location.assign('thank-you.html'), 3000); // time to read the success message
+      location.assign('thank-you.html');
     } catch (err) {
       fail('משהו השתבש בשליחה. נסו שוב בעוד רגע, או שלחו לי הודעה בוואטסאפ: 050-4167903');
     } finally {
