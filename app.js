@@ -63,7 +63,7 @@
     form.hidden = true;
     done.querySelector('[data-done-name]').textContent = name.split(' ')[0] || name;
     const url = location.origin + location.pathname + '?src=share';
-    done.querySelector('[data-share]').href = 'https://wa.me/?text=' + encodeURIComponent('מצאתי מדריך חינם למנהלי עמותות: אמונה וחזון, קשר אמיתי עם התורם, ועמותה שמתנהלת כעסק בריא. שווה לקבל: ' + url);
+    done.querySelector('[data-share]').href = 'https://wa.me/?text=' + encodeURIComponent('מצאתי מדריך חינם למנהלי עמותות: איך להפסיק לכבות שריפות, להפוך תורמים לשותפים אמיתיים ולבנות עמותה יציבה ומסודרת. שווה לקבל: ' + url);
     done.hidden = false; done.focus({ preventScroll: true });
     const r = done.getBoundingClientRect();
     if (r.top < 70 || r.bottom > innerHeight) window.scrollBy({ top: r.top - 90, behavior: 'smooth' });

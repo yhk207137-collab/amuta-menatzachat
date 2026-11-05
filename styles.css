@@ -105,12 +105,12 @@ h1 em{display:block;font-size:1.2em;line-height:1.05}
 /* what is in the guide */
 .get{max-width:1200px;margin:0 auto;padding:84px clamp(16px,4vw,48px) 40px}
 .sec-title{margin:0 0 34px;text-align:center;font-size:clamp(32px,6vw,54px);font-weight:900;line-height:1.1}
-.get-group{max-width:860px;margin:0 auto 14px;background:#fff;border-radius:var(--radius);padding:22px 24px;box-shadow:0 10px 30px -18px rgba(10,30,60,.35);border:1px solid rgba(10,30,60,.05)}
-.get-label{display:inline-block;margin:0 0 12px;padding:4px 14px;border-radius:999px;background:var(--navy);color:var(--cyan);font-size:16px;font-weight:900;line-height:1.5}
-.get-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.get-list li{display:grid;gap:1px;line-height:1.35}
-.get-list b{font-size:clamp(20px,2.6vw,23px);font-weight:900}
-.get-list span{font-size:17.5px;color:var(--muted)}
+.get-list{list-style:none;margin:0 auto;padding:0;max-width:860px;display:grid;gap:12px}
+.get-list li{position:relative;padding:18px 62px 18px 20px;border-radius:20px;background:#fff;border:1px solid rgba(10,30,60,.06);font-size:clamp(18px,2.2vw,21px);font-weight:700;line-height:1.4}
+.get-list li::before{content:"";position:absolute;right:20px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;background:var(--cyan)}
+.get-list li::after{content:"";position:absolute;right:30px;top:50%;width:7px;height:13px;margin-top:-9px;border:solid var(--navy);border-width:0 3px 3px 0;transform:rotate(45deg)}
+.get-list li{font-weight:500;line-height:1.4}
+.get-list b{font-weight:900}
 .get-cta{max-width:420px;margin:30px auto 0}
 
 /* for whom */
@@ -157,7 +157,6 @@ h1 em{display:block;font-size:1.2em;line-height:1.05}
 .pain-turn[data-reveal].in{transform:none;transition:opacity .5s,transform .6s cubic-bezier(.2,1.6,.4,1)}
 
 @media (min-width:720px){
-  .get-group{padding:26px 30px}
   .who-card{grid-template-columns:220px 1fr;text-align:right;padding:36px}
   .who-card img{width:220px}
   .who-words{justify-content:flex-start}
