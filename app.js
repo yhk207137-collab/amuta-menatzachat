@@ -143,8 +143,12 @@
   }), { threshold: .25 });
   document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
-  // sticky CTA on mobile once the hero form is off screen (and not after signing up)
+  // sticky CTA on mobile: after the top button scrolls away, until the form at the end comes into view
   const sticky = document.querySelector('[data-sticky]');
-  new IntersectionObserver(([en]) => sticky.classList.toggle('on', !en.isIntersecting && !form.hidden && en.boundingClientRect.top < 0))
+  const seen = { top: true, form: false };
+  const update = () => sticky.classList.toggle('on', !seen.top && !seen.form && !form.hidden);
+  new IntersectionObserver(([en]) => { seen.top = en.isIntersecting || en.boundingClientRect.top > 0; update(); })
+    .observe(document.querySelector('.hero-cta'));
+  new IntersectionObserver(([en]) => { seen.form = en.isIntersecting; update(); })
     .observe(document.getElementById('join'));
 })();

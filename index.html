@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=phone1">
+<link rel="stylesheet" href="styles.css?v=order1">
 </head>
 <body>
 
@@ -31,7 +31,7 @@
 
 <main>
   <!-- HERO -->
-  <section class="hero" id="join">
+  <section class="hero" id="top">
     <div class="hero-head">
       <p class="eyebrow"><span class="dot"></span>מדריך חינם למנהלי עמותות</p>
       <h1>העמותה שלך יכולה לגייס <em>הרבה יותר.</em></h1>
@@ -44,39 +44,8 @@
       </div>
     </div>
 
-    <div class="hero-form">
-      <form class="signup" data-form novalidate>
-        <p class="form-title">לאן לשלוח לך את המדריך?</p>
-        <div class="field">
-          <label for="f-name">שם מלא</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="ישראל ישראלי">
-        </div>
-        <div class="field">
-          <label for="f-email">אימייל</label>
-          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" required maxlength="120" placeholder="name@example.com">
-          <p class="hint" data-hint hidden></p>
-        </div>
-        <div class="field">
-          <label for="f-phone">טלפון <small class="opt">(לא חובה)</small></label>
-          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20" placeholder="050-1234567">
-          <p class="hint" data-phone-hint hidden></p>
-        </div>
-        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label class="consent">
-          <input type="checkbox" name="agree" value="yes">
-          <span data-consent-text>אני מאשר/ת לקבל מיהושע כהן את המדריך במייל, ומדי פעם גם תוכן מקצועי, עדכונים והצעות (כולל דברי פרסומת). אפשר להסיר בכל רגע בלחיצה על "הסרה" בתחתית כל מייל.</span>
-        </label>
-        <button type="submit" class="btn"><span>אני רוצה את המדריך</span></button>
-        <p class="fine">חינם. המדריך נשלח ישר למייל שלך, והפרטים לא יועברו לאף אחד.</p>
-        <p class="error" role="alert" data-error hidden></p>
-      </form>
-
-      <div class="done" data-done hidden tabindex="-1">
-        <div class="done-check" aria-hidden="true"></div>
-        <h2>המדריך בדרך אליך, <span data-done-name></span>!</h2>
-        <p>שלחנו אותו עכשיו למייל שלך. לא רואה אותו? כדאי לבדוק גם בתיקיית "קידומי מכירות" או "ספאם".</p>
-        <a class="btn btn-ghost" data-share target="_blank" rel="noopener">שתף מנהל עמותה שאתה מכיר</a>
-      </div>
+    <div class="hero-cta">
+      <a class="btn" href="#join">אני רוצה את המדריך</a>
     </div>
   </section>
 
@@ -125,12 +94,45 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="final">
-    <div class="final-card" data-reveal>
+  <!-- FINAL CTA + FORM -->
+  <section class="final" id="join">
+    <div class="final-card">
       <h2>מוכן לעמותה <em>מנצחת?</em></h2>
       <p>המדריך מחכה לך. חינם, ישר למייל.</p>
-      <a class="btn" href="#join">לקבלת המדריך</a>
+    <div class="final-form">
+      <form class="signup" data-form novalidate>
+        <p class="form-title">לאן לשלוח לך את המדריך?</p>
+        <div class="field">
+          <label for="f-name">שם מלא</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="ישראל ישראלי">
+        </div>
+        <div class="field">
+          <label for="f-email">אימייל</label>
+          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" required maxlength="120" placeholder="name@example.com">
+          <p class="hint" data-hint hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-phone">טלפון <small class="opt">(לא חובה)</small></label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" maxlength="20" placeholder="050-1234567">
+          <p class="hint" data-phone-hint hidden></p>
+        </div>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent">
+          <input type="checkbox" name="agree" value="yes">
+          <span data-consent-text>אני מאשר/ת לקבל מיהושע כהן את המדריך במייל, ומדי פעם גם תוכן מקצועי, עדכונים והצעות (כולל דברי פרסומת). אפשר להסיר בכל רגע בלחיצה על "הסרה" בתחתית כל מייל.</span>
+        </label>
+        <button type="submit" class="btn"><span>אני רוצה את המדריך</span></button>
+        <p class="fine">חינם. המדריך נשלח ישר למייל שלך, והפרטים לא יועברו לאף אחד.</p>
+        <p class="error" role="alert" data-error hidden></p>
+      </form>
+
+      <div class="done" data-done hidden tabindex="-1">
+        <div class="done-check" aria-hidden="true"></div>
+        <h2>המדריך בדרך אליך, <span data-done-name></span>!</h2>
+        <p>שלחנו אותו עכשיו למייל שלך. לא רואה אותו? כדאי לבדוק גם בתיקיית "קידומי מכירות" או "ספאם".</p>
+        <a class="btn btn-ghost" data-share target="_blank" rel="noopener">שתף מנהל עמותה שאתה מכיר</a>
+      </div>
+    </div>
     </div>
   </section>
 </main>
@@ -143,6 +145,6 @@
 
 <a class="sticky-cta" href="#join" data-sticky>אני רוצה את המדריך</a>
 
-<script src="app.js?v=phone1"></script>
+<script src="app.js?v=order1"></script>
 </body>
 </html>

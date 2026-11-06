@@ -173,3 +173,25 @@ h1 em{display:block;font-size:1.2em;line-height:1.05}
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   [data-reveal]{opacity:1;transform:none}
 }
+
+/* 2026-11 order: the top shows the guide and a button; the form sits in the closing box */
+.hero{grid-template-areas:"head" "book" "cta"}
+.hero-cta{grid-area:cta;display:flex;justify-content:center}
+.hero-cta .btn{max-width:420px}
+.final{scroll-margin-top:70px}
+.final-card .final-form{position:relative;max-width:520px;margin:0 auto;text-align:right;color:var(--ink)}
+.final-card .final-form .signup{margin:0 auto}
+.final-card .final-form .btn{max-width:none}
+.final-card .final-form p{opacity:1;font-weight:inherit}
+.final-card .final-form .form-title{margin:0 4px 14px;font-size:21px;font-weight:900}
+.final-card .final-form .fine{margin:12px 4px 0;font-size:13px;font-weight:400;color:var(--muted)}
+.final-card .final-form .error{margin:10px 0 0;font-size:15px;font-weight:700}
+.final-card .final-form .done{color:var(--ink)}
+.final-card .final-form .done p{font-size:18px;color:var(--muted);font-weight:700}
+@media (min-width:960px){
+  .hero{grid-template-areas:"head book" "head cta";align-items:center;min-height:0;padding-top:28px;padding-bottom:40px;row-gap:0}
+  .hero-head{align-self:center}
+  .hero-cta{align-self:start}
+  .book{width:min(18vw,230px)}
+  .book-wrap{padding-bottom:18px}
+}
