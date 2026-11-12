@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>שריון מקום לפגישת הקפצה | יהושע כהן</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1E3C">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=consult1">
+<link rel="stylesheet" href="consult.css?v=consult1">
+</head>
+<body class="cs-page">
+<header class="top">
+  <a class="brand" href="./" aria-label="יהושע כהן — אסטרטגיה וליווי לעמותות">
+    <img src="assets/mark.webp" alt="" width="54" height="40">
+    <span><b>יהושע כהן</b><small>אסטרטגיה וליווי לעמותות</small></span>
+  </a>
+</header>
+<main class="cs-wrap">
+  <section class="cs-card" data-card>
+    <h1 data-title>בוחרים מועד <em>לפגישת ההקפצה</em></h1>
+    <p class="cs-meta"><span class="cs-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>40 דקות</span><span class="cs-pill">ללא עלות</span></p>
+    <div data-body><div class="cs-loading" aria-label="טוען"></div></div>
+  </section>
+</main>
+<footer class="foot cs-foot">
+  <p><b>יהושע כהן</b> · אסטרטגיה וליווי לעמותות · <a href="tel:0504167903">050-4167903</a></p>
+</footer>
+<script src="consult.js?v=consult1"></script>
+<script>
+(function () {
+  var C = window.Consult;
+  var body = document.querySelector('[data-body]');
+  var title = document.querySelector('[data-title]');
+  var token = new URLSearchParams(location.search).get('r');
+  var chosen = null;
+  var CHECK = '<div class="cs-ok-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.6 4.5L19 7.5"/></svg></div>';
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var label = function (iso) { var d = new Date(iso); return 'יום ' + C.weekday(d).replace(/^יום /, '') + ', ' + C.dm(d) + ' בשעה ' + C.time(d); };
+
+  // Free times grouped by day; the person picks a day, then a time.
+  function picker(slots, onPick) {
+    var days = [];
+    slots.forEach(function (iso) {
+      var k = C.dayKey(new Date(iso));
+      var day = days.filter(function (x) { return x.key === k; })[0];
+      if (!day) days.push(day = { key: k, slots: [] });
+      day.slots.push(iso);
+    });
+    if (!days.length) {
+      body.innerHTML = '<p class="cs-empty">כרגע אין מועדים פנויים בשבועות הקרובים. אפשר להתקשר אליי: <a href="tel:0504167903">050-4167903</a></p>';
+      return;
+    }
+    body.innerHTML = '<p class="cs-h2">איזה יום נוח לך?</p><div class="cs-days" role="group" aria-label="ימים"></div><p class="cs-h2">ובאיזו שעה?</p><div class="cs-times" role="group" aria-label="שעות"></div>';
+    var dayBox = body.querySelector('.cs-days');
+    var timeBox = body.querySelector('.cs-times');
+    function showDay(i) {
+      Array.prototype.forEach.call(dayBox.children, function (b, j) { b.setAttribute('aria-pressed', String(i === j)); });
+      timeBox.innerHTML = '';
+      days[i].slots.forEach(function (iso) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'cs-time'; b.textContent = C.time(new Date(iso)); b.setAttribute('aria-pressed', 'false');
+        b.dataset.slot = iso;
+        b.onclick = function () { onPick(iso); };
+        timeBox.appendChild(b);
+      });
+    }
+    days.forEach(function (day, i) {
+      var d = new Date(day.slots[0]);
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'cs-day';
+      b.innerHTML = '<small>' + esc(C.weekday(d)) + '</small><b>' + esc(C.dm(d)) + '</b>';
+      b.onclick = function () { showDay(i); };
+      dayBox.appendChild(b);
+    });
+    showDay(0);
+  }
+
+  function errorText(e) {
+    if (e.code === 'slot-taken') return 'המועד הזה נתפס הרגע. בחר/י מועד אחר.';
+    if (e.code === 'full') return 'כל המקומות נתפסו.';
+    return 'משהו השתבש. נסו שוב בעוד רגע, או התקשרו: 050-4167903';
+  }
+
+  // ── A new booking ─────────────────────────────────────────────
+  function newBooking() {
+    C.get('/slots').then(function (r) {
+      if (!r.open) { location.replace('thank-you.html'); return; }
+      picker(r.slots, details);
+    }).catch(function () { body.innerHTML = '<p class="cs-empty">לא הצלחנו לטעון את היומן. נסו לרענן, או התקשרו: <a href="tel:0504167903">050-4167903</a></p>'; });
+  }
+
+  function details(iso) {
+    chosen = iso;
+    body.innerHTML =
+      '<p class="cs-chosen">' + esc(label(iso)) + '<button type="button" data-change>שינוי</button></p>' +
+      '<form class="cs-form" novalidate>' +
+      '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
+      '<label><span>שם מלא</span><input name="name" required autocomplete="name"></label>' +
+      '<label><span>שם העמותה</span><input name="org" required autocomplete="organization"></label>' +
+      '<label><span>טלפון נייד</span><input name="phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr"></label>' +
+      '<label><span>אימייל</span><input name="email" type="email" inputmode="email" required autocomplete="email" dir="ltr"></label>' +
+      '<p class="cs-err" data-err hidden></p>' +
+      '<button class="btn cs-btn" type="submit">לשריין את המועד</button>' +
+      '</form>';
+    var form = body.querySelector('form');
+    C.prefill(form);
+    body.querySelector('[data-change]').onclick = newBooking;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var err = form.querySelector('[data-err]');
+      var d = C.formData(form);
+      var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'צריך מספר טלפון, אליו תגיע התזכורת.' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
+      if (miss) { err.textContent = miss; err.hidden = false; return; }
+      d.start = chosen; d.source = 'דף התודה';
+      var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
+      C.post('/book', d).then(function (r) { booked(r.booking); }).catch(function (e2) {
+        if (e2.code === 'full') { location.replace('thank-you.html'); return; }
+        err.textContent = errorText(e2); err.hidden = false;
+        if (e2.code === 'slot-taken') setTimeout(newBooking, 1800);
+      }).then(function () { btn.removeAttribute('aria-busy'); });
+    });
+  }
+
+  function booked(b) {
+    title.innerHTML = 'נקבע! <em>נתראה ב' + esc(b.label) + '</em>';
+    body.innerHTML = CHECK.replace('cs-ok-icon', 'cs-ok-icon" style="margin-top:20px') +
+      '<p class="cs-sub" style="font-size:18px">40 דקות שיכולות לשנות את הכיוון של ' + esc(b.org) + '.</p>' +
+      '<p class="cs-note">הזמנה ליומן נשלחה למייל שלך' + (b.meetLink ? ', עם הקישור לפגישה' : '') + '. יום לפני אשלח תזכורת לטלפון.</p>' +
+      '<p class="cs-note">צריך להזיז? <a href="book.html?r=' + encodeURIComponent(b.token) + '" style="color:#5CE1E6">לשינוי המועד</a></p>';
+  }
+
+  // ── Moving or canceling (link from the reminder) ──────────────
+  function manage() {
+    title.innerHTML = 'הפגישה שלך <em>לפגישת ההקפצה</em>';
+    C.get('/manage/' + encodeURIComponent(token)).then(function (r) {
+      var b = r.booking;
+      if (['BOOKED', 'CONFIRMED', 'NOT_CONFIRMED'].indexOf(b.status) < 0 || new Date(b.start) < new Date()) {
+        title.innerHTML = b.status === 'CANCELED' ? 'הפגישה בוטלה' : 'הפגישה הזאת כבר לא פעילה';
+        body.innerHTML = '<p class="cs-note">רוצה לקבוע מחדש? <a href="book.html" style="color:#5CE1E6">לבחירת מועד</a></p>';
+        return;
+      }
+      title.innerHTML = 'הפגישה שלך <em>' + esc(b.label) + '</em>';
+      body.innerHTML = '<p class="cs-h2" style="margin-top:20px">צריך להזיז? בחר/י מועד חדש</p><div data-pick></div><button type="button" class="cs-link" data-cancel>אני צריך/ה לבטל את הפגישה</button>';
+      var holder = body;
+      var pickBox = body.querySelector('[data-pick]');
+      body = pickBox;
+      picker(r.slots, function (iso) {
+        body = holder;
+        chosen = iso;
+        body.innerHTML = '<p class="cs-chosen">המועד החדש: ' + esc(label(iso)) + '</p><p class="cs-err" data-err hidden></p><button class="btn cs-btn" type="button" data-go>לאשר את המועד החדש</button><br><button type="button" class="cs-link" data-back>חזרה</button>';
+        body.querySelector('[data-back]').onclick = manage;
+        body.querySelector('[data-go]').onclick = function () {
+          var btn = this; btn.setAttribute('aria-busy', 'true');
+          C.post('/reschedule', { token: token, start: chosen }).then(function (r2) {
+            title.innerHTML = 'עודכן! <em>נתראה ב' + esc(r2.booking.label) + '</em>';
+            body.innerHTML = CHECK + '<p class="cs-note">עדכון נשלח גם ליומן שלך. התזכורות יגיעו לפי המועד החדש.</p>';
+          }).catch(function (e) { var err = body.querySelector('[data-err]'); err.textContent = errorText(e); err.hidden = false; btn.removeAttribute('aria-busy'); });
+        };
+      });
+      body = holder;
+      body.querySelector('[data-cancel]').onclick = function () {
+        if (!confirm('לבטל את הפגישה? המקום יתפנה למישהו אחר.')) return;
+        C.post('/cancel', { token: token }).then(function () {
+          title.innerHTML = 'הפגישה בוטלה';
+          body.innerHTML = '<p class="cs-note">תודה שעדכנת. אם תרצה לקבוע מחדש, <a href="book.html" style="color:#5CE1E6">אפשר כאן</a> כל עוד נשארו מקומות.</p>';
+        }).catch(function (e) { alert(errorText(e)); });
+      };
+    }).catch(function () {
+      title.innerHTML = 'הפגישה לא נמצאה';
+      body.innerHTML = '<p class="cs-note">אפשר להתקשר אליי: <a href="tel:0504167903" style="color:#5CE1E6">050-4167903</a></p>';
+    });
+  }
+
+  if (token) manage(); else newBooking();
+})();
+</script>
+</body>
+</html>
