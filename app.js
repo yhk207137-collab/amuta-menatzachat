@@ -117,7 +117,8 @@
         let left = 2;
         [post(CRM_ENDPOINT), post(ENDPOINT)].forEach((sent) => sent.then(resolve, () => { if (--left === 0) reject(new Error('failed')); }));
       });
-      try { localStorage.setItem('signedUp', name); } catch (_) {}
+      // Name, email and phone fill in the consult booking form on the next pages.
+      try { localStorage.setItem('signedUp', name); localStorage.setItem('signedUpEmail', email); localStorage.setItem('signedUpPhone', phone.value || ''); } catch (_) {}
       location.assign('thank-you.html');
     } catch (err) {
       fail('משהו השתבש בשליחה. נסו שוב בעוד רגע, או שלחו לי הודעה בוואטסאפ: 050-4167903');
