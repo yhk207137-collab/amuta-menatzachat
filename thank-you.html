@@ -11,7 +11,7 @@
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=offer1">
 <link rel="stylesheet" href="consult.css?v=offer1">
-<link rel="stylesheet" href="offer.css?v=offer1">
+<link rel="stylesheet" href="offer.css?v=offer2">
 </head>
 <body class="of">
 
@@ -55,10 +55,8 @@
       <div class="of-dial" aria-hidden="true">
         <svg viewBox="0 0 400 400">
           <circle class="trk" cx="200" cy="200" r="170"/>
-          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-7"/>
-          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-274"/>
-          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-541"/>
-          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-808"/>
+          <defs><linearGradient id="ofg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5CE1E6"/><stop offset="1" stop-color="#00A4BA"/></linearGradient></defs>
+          <circle class="seg" cx="200" cy="200" r="170" style="--len:1068"/>
         </svg>
         <div class="of-dial-c"><b>40</b><span>דקות</span><small>שעושות סדר בעמותה שלך</small></div>
       </div>
@@ -76,12 +74,15 @@
   <!-- WHAT YOU GET -->
   <section class="of-plan">
     <h2 class="sec-title" data-reveal>מה תקבל <em>ב-40 הדקות</em> האלה?</h2>
-    <ol class="of-steps">
-      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>אבחון מהיר של נקודת התקיעה</h3><p>איפה העמותה שלך נתקעת היום, ולמה דווקא שם.</p></li>
-      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>השיחה הבאה עם תורם, אחרת</h3><p>איך להגיע אליה כשותף בעשייה, ולא כמי שמבקש טובה.</p></li>
-      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>כיוון ברור להמשך</h3><p>הדרך מכיבוי שריפות לעמותה שצומחת, בשלבים שאפשר לעמוד בהם.</p></li>
-      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>צעד אחד ליישום מיידי</h3><p>משהו אחד, ברור ומעשי, שאפשר להתחיל בו כבר מחר בבוקר.</p></li>
-    </ol>
+    <div class="of-get" data-reveal>
+      <p class="of-get-t">בסוף הפגישה תצא עם:</p>
+      <ul class="of-gets">
+        <li data-reveal><span class="of-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>אבחון מהיר של נקודת התקיעה</h3><p>איפה העמותה שלך נתקעת היום, ולמה דווקא שם.</p></div></li>
+        <li data-reveal><span class="of-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>השיחה הבאה עם תורם, אחרת</h3><p>איך להגיע אליה כשותף בעשייה, ולא כמי שמבקש טובה.</p></div></li>
+        <li data-reveal><span class="of-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>כיוון ברור להמשך</h3><p>הדרך מכיבוי שריפות לעמותה שצומחת, בשלבים שאפשר לעמוד בהם.</p></div></li>
+        <li data-reveal><span class="of-ck" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><h3>צעד אחד ליישום מיידי</h3><p>משהו אחד, ברור ומעשי, שאפשר להתחיל בו כבר מחר בבוקר.</p></div></li>
+      </ul>
+    </div>
     <div class="of-mid-cta" data-reveal data-open-only><a class="btn" href="book.html" data-book>אני רוצה לשריין מקום</a></div>
   </section>
 
