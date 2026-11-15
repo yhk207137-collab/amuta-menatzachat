@@ -206,7 +206,9 @@
       io.unobserve(el);
     });
   }, { threshold: 0.15 }) : null;
-  $$('[data-reveal]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+  var all = /[?&]shot/.test(location.search); // screenshots: show everything at once
+  if (all) { var st = document.createElement('style'); st.textContent = '[data-reveal]{opacity:1!important;transform:none!important;transition:none!important}'; document.head.appendChild(st); }
+  $$('[data-reveal]').forEach(function (el) { io && !all ? io.observe(el) : el.classList.add('in'); });
 
   // Sticky button on the phone: after the top button scrolls away, until the closing box shows
   var sticky = document.querySelector('[data-sticky]');
