@@ -35,7 +35,9 @@
   var C = window.Consult;
   var body = document.querySelector('[data-body]');
   var title = document.querySelector('[data-title]');
-  var token = new URLSearchParams(location.search).get('r');
+  var qs = new URLSearchParams(location.search);
+  var token = qs.get('r') || qs.get('c');
+  var confirmMode = !qs.get('r') && !!qs.get('c');
   var chosen = null;
   var CHECK = '<div class="cs-ok-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.6 4.5L19 7.5"/></svg></div>';
   var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
@@ -113,7 +115,7 @@
       e.preventDefault();
       var err = form.querySelector('[data-err]');
       var d = C.formData(form);
-      var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'צריך מספר טלפון, אליו תגיע התזכורת.' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
+      var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'מה מספר הטלפון שלך?' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
       if (miss) { err.textContent = miss; err.hidden = false; return; }
       d.start = chosen; d.source = 'דף התודה';
       var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
@@ -129,7 +131,7 @@
     title.innerHTML = 'נקבע! <em>נתראה ב' + esc(b.label) + '</em>';
     body.innerHTML = CHECK.replace('cs-ok-icon', 'cs-ok-icon" style="margin-top:20px') +
       '<p class="cs-sub" style="font-size:18px">40 דקות שיכולות לשנות את הכיוון של ' + esc(b.org) + '.</p>' +
-      '<p class="cs-note">הזמנה ליומן נשלחה למייל שלך' + (b.meetLink ? ', עם הקישור לפגישה' : '') + '. יום לפני אשלח תזכורת לטלפון.</p>' +
+      '<p class="cs-note">הזמנה ליומן נשלחה למייל שלך' + (b.meetLink ? ', עם הקישור לפגישה' : '') + '. יום לפני אשלח לך תזכורת במייל.</p>' +
       '<p class="cs-note">צריך להזיז? <a href="book.html?r=' + encodeURIComponent(b.token) + '" style="color:#5CE1E6">לשינוי המועד</a></p>';
   }
 
@@ -175,7 +177,19 @@
     });
   }
 
-  if (token) manage(); else newBooking();
+  // ── The arrival confirmation button in the reminder email ──────
+  function confirmArrival() {
+    title.innerHTML = 'רק רגע...';
+    C.post('/confirm', { token: token }).then(function (r) {
+      var b = r.booking;
+      title.innerHTML = 'תודה! <em>נתראה ב' + esc(b.label) + '</em>';
+      body.innerHTML = CHECK + '<p class="cs-sub" style="font-size:18px">ההגעה שלך אושרה.</p>' +
+        (b.meetLink ? '<p class="cs-note">הקישור לפגישה: <a href="' + esc(b.meetLink) + '" style="color:#5CE1E6">לכניסה</a>. שעתיים לפני אשלח תזכורת במייל.</p>' : '<p class="cs-note">שעתיים לפני אשלח תזכורת במייל.</p>') +
+        '<p class="cs-note">בכל זאת צריך להזיז? <a href="book.html?r=' + encodeURIComponent(token) + '" style="color:#5CE1E6">לשינוי המועד</a></p>';
+    }).catch(function () { manage(); });
+  }
+
+  if (confirmMode) confirmArrival(); else if (token) manage(); else newBooking();
 })();
 </script>
 </body>
