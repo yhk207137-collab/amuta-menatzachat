@@ -9,86 +9,218 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=consult1">
-<link rel="stylesheet" href="consult.css?v=consult1">
+<link rel="stylesheet" href="styles.css?v=offer1">
+<link rel="stylesheet" href="consult.css?v=offer1">
+<link rel="stylesheet" href="offer.css?v=offer1">
 </head>
-<body class="cs-page">
+<body class="of">
+
 <header class="top">
   <a class="brand" href="./" aria-label="יהושע כהן — אסטרטגיה וליווי לעמותות">
     <img src="assets/mark.webp" alt="" width="54" height="40">
     <span><b>יהושע כהן</b><small>אסטרטגיה וליווי לעמותות</small></span>
   </a>
+  <a class="top-cta" href="book.html" data-book>לשריון מקום</a>
 </header>
-<main class="cs-wrap">
-  <section class="cs-card">
-    <ol class="cs-steps" aria-label="שלב 2 מתוך 2">
-      <li class="is-done"><span class="cs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.6 4.5L19 7.5"/></svg></span>המדריך</li>
-      <li class="is-now" aria-current="step"><span class="cs-dot">2</span>התוכנית</li>
-    </ol>
 
-    <h1>המדריך בדרך אליך. <em>עכשיו בוא נהפוך אותו לתוכנית.</em></h1>
-    <p class="cs-sub">פגישת הקפצה אישית לעמותה שלך</p>
-    <p class="cs-meta"><span class="cs-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>40 דקות</span><span class="cs-pill">ללא עלות</span><span class="cs-pill">פגישה אונליין</span></p>
+<main>
+  <!-- HERO -->
+  <section class="of-hero">
+    <div class="of-hero-in">
+      <div>
+        <ol class="cs-steps" aria-label="שלב 2 מתוך 2">
+          <li class="is-done"><span class="cs-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.6 4.5L19 7.5"/></svg></span>המדריך</li>
+          <li class="is-now" aria-current="step"><span class="cs-dot">2</span>התוכנית</li>
+        </ol>
+        <p class="of-kicker">המדריך בדרך אליך.</p>
+        <h1>עכשיו בוא נהפוך אותו לתוכנית.</h1>
+        <p class="of-sub">פגישת הקפצה אישית לעמותה שלך</p>
+        <p class="cs-meta"><span class="cs-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>40 דקות</span><span class="cs-pill">ללא עלות</span><span class="cs-pill">פגישה אונליין</span></p>
 
-    <ul class="cs-gets" aria-label="מה יוצאים איתו מהפגישה">
-      <li><b>אבחון מהיר של נקודת התקיעה.</b> איפה העמותה שלך נתקעת היום, ולמה דווקא שם.</li>
-      <li><b>צעד אחד ליישום מיידי.</b> משהו אחד, ברור ומעשי, שאפשר להתחיל בו כבר מחר בבוקר.</li>
-      <li><b>השיחה הבאה עם תורם, אחרת.</b> איך להגיע אליה כשותף בעשייה, ולא כמי שמבקש טובה.</li>
-      <li><b>כיוון ברור להמשך.</b> הדרך מכיבוי שריפות לעמותה שצומחת, בשלבים שאפשר לעמוד בהם.</li>
-    </ul>
+        <div data-open>
+          <div class="of-seats" data-seats hidden>
+            <p class="of-seats-t">פתוח ל-15 העמותות הראשונות בלבד · <b data-left></b></p>
+            <div class="of-dots" data-dots aria-hidden="true"></div>
+          </div>
+          <div class="of-cta">
+            <a class="btn" href="book.html" data-book>אני רוצה לשריין מקום</a>
+            <p class="of-note">בוחרים מועד מתוך השעות הפנויות ביומן שלי. לוקח פחות מדקה.</p>
+          </div>
+        </div>
+        <div data-closed-top hidden>
+          <p class="cs-full" style="text-align:right">כל המקומות נתפסו. <span>אפשר להצטרף לרשימת ההמתנה למטה.</span></p>
+        </div>
+      </div>
 
-    <div data-open>
-      <p class="cs-scarcity">פתוח ל-15 העמותות הראשונות בלבד<span data-left-line hidden> · <b data-left></b></span></p>
-      <a class="btn cs-btn" href="book.html" data-book>אני רוצה לשריין מקום</a>
-      <p class="cs-note">בוחרים מועד מתוך השעות הפנויות ביומן שלי. לוקח פחות מדקה.</p>
+      <div class="of-dial" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <circle class="trk" cx="200" cy="200" r="170"/>
+          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-7"/>
+          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-274"/>
+          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-541"/>
+          <circle class="seg" cx="200" cy="200" r="170" style="--len:253;stroke-dashoffset:-808"/>
+        </svg>
+        <div class="of-dial-c"><b>40</b><span>דקות</span><small>שעושות סדר בעמותה שלך</small></div>
+      </div>
     </div>
+  </section>
 
-    <div data-closed hidden>
-      <p class="cs-full">כל המקומות נתפסו. <span>השאר פרטים לרשימת ההמתנה, ואחזור אליך ברגע שייפתח מקום.</span></p>
-      <form class="cs-form" data-waitlist novalidate>
-        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label><span>שם מלא</span><input name="name" required autocomplete="name"></label>
-        <label><span>טלפון</span><input name="phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr"></label>
-        <label><span>שם העמותה</span><input name="org" autocomplete="organization"></label>
-        <p class="cs-err" data-err hidden></p>
-        <button class="btn cs-btn" type="submit">הוסיפו אותי לרשימת ההמתנה</button>
-      </form>
-      <p class="cs-done" data-wait-done hidden>תודה! אתה ברשימה, ואחזור אליך ברגע שייפתח מקום.</p>
+  <!-- TURN -->
+  <section class="of-turn" data-reveal-group>
+    <p class="pain-line" data-reveal>קראת את המדריך. <b>יש לך כיוון.</b></p>
+    <p class="pain-line" data-reveal>אבל העמותה שלך <b>היא לא עמותה כללית.</b></p>
+    <p class="pain-line" data-reveal>יש לה תורמים משלה, תקיעות משלה, <b>ופוטנציאל משלה.</b></p>
+    <p class="pain-turn" data-reveal>בוא נעשה את זה ביחד!</p>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="of-plan">
+    <h2 class="sec-title" data-reveal>מה תקבל <em>ב-40 הדקות</em> האלה?</h2>
+    <ol class="of-steps">
+      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>אבחון מהיר של נקודת התקיעה</h3><p>איפה העמותה שלך נתקעת היום, ולמה דווקא שם.</p></li>
+      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>השיחה הבאה עם תורם, אחרת</h3><p>איך להגיע אליה כשותף בעשייה, ולא כמי שמבקש טובה.</p></li>
+      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>כיוון ברור להמשך</h3><p>הדרך מכיבוי שריפות לעמותה שצומחת, בשלבים שאפשר לעמוד בהם.</p></li>
+      <li data-reveal><span class="of-min"><b>10</b><small>דקות</small></span><h3>צעד אחד ליישום מיידי</h3><p>משהו אחד, ברור ומעשי, שאפשר להתחיל בו כבר מחר בבוקר.</p></li>
+    </ol>
+    <div class="of-mid-cta" data-reveal data-open-only><a class="btn" href="book.html" data-book>אני רוצה לשריין מקום</a></div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section class="for">
+    <h2 class="sec-title" data-reveal>הפגישה הזאת <em>בשבילך</em> אם...</h2>
+    <ul class="for-list">
+      <li data-reveal>אתה מנהל עמותה או מוסד, ועובד קשה, אבל מרגיש שהעמותה לא מתקדמת</li>
+      <li data-reveal>אתה רוצה תוכנית ברורה לעמותה שלך, ולא עוד הרצאה כללית</li>
+      <li data-reveal>אתה מוכן לתת 40 דקות כדי לעשות סדר ולצאת עם צעד ראשון</li>
+    </ul>
+  </section>
+
+  <!-- TESTIMONIALS: draft slots until the real ones arrive -->
+  <section class="of-say">
+    <h2 class="sec-title" data-reveal>מה אומרים <em>מנהלי עמותות</em></h2>
+    <div class="of-quotes">
+      <figure class="of-q draft" data-reveal><p>כאן תיכנס המלצה אמיתית ממנהל עמותה.</p><footer><b>שם הממליץ</b>תפקיד, שם העמותה</footer></figure>
+      <figure class="of-q draft" data-reveal><p>כאן תיכנס המלצה אמיתית ממנהל עמותה.</p><footer><b>שם הממליץ</b>תפקיד, שם העמותה</footer></figure>
+      <figure class="of-q draft" data-reveal><p>כאן תיכנס המלצה אמיתית ממנהל עמותה.</p><footer><b>שם הממליץ</b>תפקיד, שם העמותה</footer></figure>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who">
+    <div class="who-card" data-reveal>
+      <img src="assets/logo.webp" alt="יהושע כהן — אסטרטגיה וליווי לעמותות" width="220" height="220" loading="lazy">
+      <div>
+        <p class="who-kicker">מי יושב איתך בפגישה</p>
+        <h2>7 שנים ניהלתי עמותה.</h2>
+        <p class="who-words"><span>גייסתי.</span> <span>בניתי.</span> <span>ניהלתי.</span> <span>טעיתי.</span> <span>למדתי.</span> <span>הצלחתי.</span></p>
+        <p>ישבתי בכיסא שלך. בפגישה נעבוד על העמותה שלך, על התורמים שלך ועל הצעד הבא שלך, לא על תיאוריה.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final" id="book">
+    <div class="final-card">
+      <h2>15 מקומות. 40 דקות. <em>תוכנית אחת ברורה.</em></h2>
+      <div data-open>
+        <p>פגישת הקפצה אישית לעמותה שלך, ללא עלות.</p>
+        <div class="of-seats" data-seats hidden>
+          <p class="of-seats-t"><b data-left></b></p>
+          <div class="of-dots" data-dots aria-hidden="true"></div>
+        </div>
+        <div style="margin-top:24px"><a class="btn" href="book.html" data-book>אני רוצה לשריין מקום</a></div>
+        <p class="of-final-note">בוחרים מועד מתוך השעות הפנויות ביומן שלי. לוקח פחות מדקה.</p>
+      </div>
+      <div data-closed hidden>
+        <p class="cs-full">כל המקומות נתפסו. <span>השאר פרטים לרשימת ההמתנה, ואחזור אליך ברגע שייפתח מקום.</span></p>
+        <form class="cs-form" data-waitlist novalidate>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label><span>שם מלא</span><input name="name" required autocomplete="name"></label>
+          <label><span>טלפון</span><input name="phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr"></label>
+          <label><span>שם העמותה</span><input name="org" autocomplete="organization"></label>
+          <p class="cs-err" data-err hidden></p>
+          <button class="btn cs-btn" type="submit">הוסיפו אותי לרשימת ההמתנה</button>
+        </form>
+        <p class="cs-done" data-wait-done hidden>תודה! אתה ברשימה, ואחזור אליך ברגע שייפתח מקום.</p>
+      </div>
     </div>
   </section>
 </main>
-<footer class="foot cs-foot">
-  <p><b>יהושע כהן</b> · אסטרטגיה וליווי לעמותות</p>
-</footer>
-<script src="consult.js?v=consult1"></script>
-<script>
-  (function () {
-    var C = window.Consult;
-    var open = document.querySelector('[data-open]');
-    var closed = document.querySelector('[data-closed]');
-    // The counter comes from the real number of booked meetings; with no answer, no number is shown.
-    C.get('/status').then(function (s) {
-      if (!s.open) { open.hidden = true; closed.hidden = false; return; }
-      document.querySelector('[data-left]').textContent = s.left === 1 ? 'נשאר מקום אחד' : 'נותרו ' + s.left + ' מקומות';
-      document.querySelector('[data-left-line]').hidden = false;
-    }).catch(function () {});
 
-    var form = document.querySelector('[data-waitlist]');
-    C.prefill(form);
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var err = form.querySelector('[data-err]');
-      var data = C.formData(form);
-      if (!data.name || C.digits(data.phone).length < 9) { err.textContent = 'צריך שם וטלפון כדי שאוכל לחזור אליך.'; err.hidden = false; return; }
-      data.email = C.stored('signedUpEmail');
-      var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
-      C.post('/waitlist', data).then(function () {
-        form.hidden = true; document.querySelector('[data-wait-done]').hidden = false;
-      }).catch(function () {
-        err.textContent = 'משהו השתבש. נסו שוב, או שלחו לי הודעה: 050-4167903'; err.hidden = false;
-      }).then(function () { btn.removeAttribute('aria-busy'); });
+<footer class="foot">
+  <img src="assets/mark.webp" alt="" width="54" height="40" loading="lazy">
+  <p><b>יהושע כהן</b> · אסטרטגיה וליווי לעמותות</p>
+  <p><a href="https://wa.me/972504167903" target="_blank" rel="noopener" dir="ltr">050-4167903</a></p>
+</footer>
+
+<a class="sticky-cta" href="book.html" data-sticky data-book>אני רוצה לשריין מקום</a>
+
+<script src="consult.js?v=offer1"></script>
+<script>
+(function () {
+  var C = window.Consult;
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // The counter and the 15 dots come from the real number of booked meetings; with no answer, they stay hidden.
+  C.get('/status').then(function (s) {
+    if (!s.open) {
+      $$('[data-open],[data-open-only],[data-sticky],.top-cta').forEach(function (el) { el.hidden = true; el.style.display = 'none'; });
+      $$('[data-closed],[data-closed-top]').forEach(function (el) { el.hidden = false; });
+      return;
+    }
+    var text = s.left === 1 ? 'נשאר מקום אחד' : 'נותרו ' + s.left + ' מקומות';
+    $$('[data-left]').forEach(function (el) { el.textContent = text; });
+    $$('[data-dots]').forEach(function (box) {
+      for (var i = 0; i < s.max; i++) { var d = document.createElement('i'); if (i >= s.left) d.className = 'taken'; box.appendChild(d); }
     });
-  })();
+    $$('[data-seats]').forEach(function (el) { el.hidden = false; });
+  }).catch(function () {});
+
+  // Waiting list (only when every place is taken)
+  var form = document.querySelector('[data-waitlist]');
+  C.prefill(form);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = form.querySelector('[data-err]');
+    var data = C.formData(form);
+    if (!data.name || C.digits(data.phone).length < 9) { err.textContent = 'צריך שם וטלפון כדי שאוכל לחזור אליך.'; err.hidden = false; return; }
+    data.email = C.stored('signedUpEmail');
+    var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
+    C.post('/waitlist', data).then(function () {
+      form.hidden = true; document.querySelector('[data-wait-done]').hidden = false;
+    }).catch(function () {
+      err.textContent = 'משהו השתבש. נסו שוב, או שלחו לי הודעה: 050-4167903'; err.hidden = false;
+    }).then(function () { btn.removeAttribute('aria-busy'); });
+  });
+
+  // Local preview: keep the API switch on the booking links
+  if (/[?&]api=local\b/.test(location.search)) $$('[data-book]').forEach(function (a) { a.href = 'book.html?api=local'; });
+
+  // Scroll reveals (staggered inside a group), like the main page
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var el = en.target, grp = el.closest('[data-reveal-group]');
+      var delay = grp ? Array.prototype.indexOf.call(grp.querySelectorAll('[data-reveal]'), el) * 450 : 0;
+      setTimeout(function () { el.classList.add('in'); }, delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15 }) : null;
+  $$('[data-reveal]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+
+  // Sticky button on the phone: after the top button scrolls away, until the closing box shows
+  var sticky = document.querySelector('[data-sticky]');
+  var topBtn = document.querySelector('.of-cta');
+  var fin = document.querySelector('.final');
+  var seen = { top: true, fin: false };
+  if ('IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seen[en.target === fin ? 'fin' : 'top'] = en.isIntersecting; });
+      sticky.classList.toggle('on', !seen.top && !seen.fin);
+    });
+    so.observe(topBtn); so.observe(fin);
+  }
+})();
 </script>
 </body>
 </html>
