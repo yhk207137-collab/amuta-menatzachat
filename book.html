@@ -36,6 +36,7 @@
   var body = document.querySelector('[data-body]');
   var title = document.querySelector('[data-title]');
   var qs = new URLSearchParams(location.search);
+  var fromPage = qs.get('from') === 'page'; var backPage = fromPage ? 'pgisha.html' : 'thank-you.html';
   var token = qs.get('r') || qs.get('c');
   var confirmMode = !qs.get('r') && !!qs.get('c');
   var chosen = null;
@@ -90,7 +91,7 @@
   // ── A new booking ─────────────────────────────────────────────
   function newBooking() {
     C.get('/slots').then(function (r) {
-      if (!r.open) { location.replace('thank-you.html'); return; }
+      if (!r.open) { location.replace(backPage); return; }
       picker(r.slots, details);
     }).catch(function () { body.innerHTML = '<p class="cs-empty">לא הצלחנו לטעון את היומן. נסו לרענן, או התקשרו: <a href="tel:0504167903">050-4167903</a></p>'; });
   }
@@ -117,10 +118,10 @@
       var d = C.formData(form);
       var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'מה מספר הטלפון שלך?' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
       if (miss) { err.textContent = miss; err.hidden = false; return; }
-      d.start = chosen; d.source = 'דף התודה';
+      d.start = chosen; d.source = fromPage ? 'דף הפגישה' : 'דף התודה';
       var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
       C.post('/book', d).then(function (r) { booked(r.booking); }).catch(function (e2) {
-        if (e2.code === 'full') { location.replace('thank-you.html'); return; }
+        if (e2.code === 'full') { location.replace(backPage); return; }
         err.textContent = errorText(e2); err.hidden = false;
         if (e2.code === 'slot-taken') setTimeout(newBooking, 1800);
       }).then(function () { btn.removeAttribute('aria-busy'); });
