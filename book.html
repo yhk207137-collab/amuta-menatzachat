@@ -29,7 +29,7 @@
 <footer class="foot cs-foot">
   <p><b>יהושע כהן</b> · אסטרטגיה וליווי לעמותות · <a href="tel:0504167903">050-4167903</a></p>
 </footer>
-<script src="consult.js?v=consult1"></script>
+<script src="consult.js?v=track1"></script>
 <script>
 (function () {
   var C = window.Consult;
@@ -118,7 +118,7 @@
       var d = C.formData(form);
       var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'מה מספר הטלפון שלך?' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
       if (miss) { err.textContent = miss; err.hidden = false; return; }
-      d.start = chosen; d.source = fromPage ? 'דף הפגישה' : 'דף התודה';
+      d.start = chosen; d.source = fromPage ? 'דף הפגישה' : 'דף התודה'; d.vid = C.vid;
       var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
       C.post('/book', d).then(function (r) { booked(r.booking); }).catch(function (e2) {
         if (e2.code === 'full') { location.replace(backPage); return; }
