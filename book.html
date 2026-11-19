@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>שריון מקום לפגישת הקפצה | יהושע כהן</title>
+<title>קביעת פגישת הקפצה | יהושע כהן</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0A1E3C">
 <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -84,7 +84,7 @@
 
   function errorText(e) {
     if (e.code === 'slot-taken') return 'המועד הזה נתפס הרגע. בחר/י מועד אחר.';
-    if (e.code === 'full') return 'כל המקומות נתפסו.';
+    if (e.code === 'full') return 'כרגע אין מועדים פנויים.';
     return 'משהו השתבש. נסו שוב בעוד רגע, או התקשרו: 050-4167903';
   }
 
@@ -168,10 +168,10 @@
       });
       body = holder;
       body.querySelector('[data-cancel]').onclick = function () {
-        if (!confirm('לבטל את הפגישה? המקום יתפנה למישהו אחר.')) return;
+        if (!confirm('לבטל את הפגישה? המועד יתפנה למישהו אחר.')) return;
         C.post('/cancel', { token: token }).then(function () {
           title.innerHTML = 'הפגישה בוטלה';
-          body.innerHTML = '<p class="cs-note">תודה שעדכנת. אם תרצה לקבוע מחדש, <a href="book.html" style="color:#5CE1E6">אפשר כאן</a> כל עוד נשארו מקומות.</p>';
+          body.innerHTML = '<p class="cs-note">תודה שעדכנת. אם תרצה לקבוע מחדש, <a href="book.html" style="color:#5CE1E6">אפשר כאן</a>.</p>';
         }).catch(function (e) { alert(errorText(e)); });
       };
     }).catch(function () {
