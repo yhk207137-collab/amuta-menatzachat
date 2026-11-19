@@ -40,8 +40,10 @@
 /* forms */
 .cs-form{display:grid;gap:12px;max-width:440px;margin:0 auto;text-align:right}
 .cs-form label{display:grid;gap:5px;font-size:14.5px;font-weight:700;color:#d5f6f8}
-.cs-form input{font:inherit;font-size:17px;padding:13px 15px;border-radius:14px;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.96);color:var(--navy)}
-.cs-form input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(92,225,230,.35)}
+.cs-form textarea{resize:vertical;min-height:86px;line-height:1.5}
+.cs-form .cs-opt{font-weight:400;opacity:.7;font-size:13px}
+.cs-form input,.cs-form textarea{font:inherit;font-size:17px;padding:13px 15px;border-radius:14px;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.96);color:var(--navy)}
+.cs-form input:focus,.cs-form textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(92,225,230,.35)}
 .cs-form .btn{margin-top:6px}
 .cs-err{margin:0;padding:10px 12px;border-radius:12px;background:rgba(255,120,120,.16);color:#ffd5d5;font-size:14.5px}
 .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}

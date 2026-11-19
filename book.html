@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=consult1">
-<link rel="stylesheet" href="consult.css?v=consult1">
+<link rel="stylesheet" href="consult.css?v=role1">
 </head>
 <body class="cs-page">
 <header class="top">
@@ -102,10 +102,12 @@
       '<p class="cs-chosen">' + esc(label(iso)) + '<button type="button" data-change>שינוי</button></p>' +
       '<form class="cs-form" novalidate>' +
       '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
-      '<label><span>שם מלא</span><input name="name" required autocomplete="name"></label>' +
       '<label><span>שם העמותה</span><input name="org" required autocomplete="organization"></label>' +
+      '<label><span>שם מלא</span><input name="name" required autocomplete="name"></label>' +
+      '<label><span>תפקיד בעמותה</span><input name="role" required autocomplete="organization-title" placeholder="למשל: מנכ״ל, יו״ר, רכז/ת גיוס"></label>' +
       '<label><span>טלפון נייד</span><input name="phone" type="tel" inputmode="tel" required autocomplete="tel" dir="ltr"></label>' +
       '<label><span>אימייל</span><input name="email" type="email" inputmode="email" required autocomplete="email" dir="ltr"></label>' +
+      '<label><span>קצת רקע על העמותה <small class="cs-opt">(לא חובה)</small></span><textarea name="about" rows="3" maxlength="1000" placeholder="במה העמותה עוסקת, ומה הכי מעסיק אותך עכשיו"></textarea></label>' +
       '<p class="cs-err" data-err hidden></p>' +
       '<button class="btn cs-btn" type="submit">לשריין את המועד</button>' +
       '</form>';
@@ -116,7 +118,7 @@
       e.preventDefault();
       var err = form.querySelector('[data-err]');
       var d = C.formData(form);
-      var miss = !d.name ? 'מה השם שלך?' : !d.org ? 'מה שם העמותה?' : C.digits(d.phone).length < 9 ? 'מה מספר הטלפון שלך?' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
+      var miss = !d.org ? 'מה שם העמותה?' : !d.name ? 'מה השם שלך?' : !d.role ? 'מה התפקיד שלך בעמותה?' : C.digits(d.phone).length < 9 ? 'מה מספר הטלפון שלך?' : !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email) ? 'כתובת המייל לא נראית תקינה.' : '';
       if (miss) { err.textContent = miss; err.hidden = false; return; }
       d.start = chosen; d.source = fromPage ? 'דף הפגישה' : 'דף התודה'; d.vid = C.vid;
       var btn = form.querySelector('button'); btn.setAttribute('aria-busy', 'true'); err.hidden = true;
@@ -131,7 +133,7 @@
   function booked(b) {
     title.innerHTML = 'נקבע! <em>נתראה ב' + esc(b.label) + '</em>';
     body.innerHTML = CHECK.replace('cs-ok-icon', 'cs-ok-icon" style="margin-top:20px') +
-      '<p class="cs-sub" style="font-size:18px">40 דקות שיכולות לשנות את הכיוון של ' + esc(b.org) + '.</p>' +
+      '<p class="cs-sub" style="font-size:18px">מחכה לשיחה שלנו על ' + esc(b.org) + '.</p>' +
       '<p class="cs-note">הזמנה ליומן נשלחה למייל שלך' + (b.meetLink ? ', עם הקישור לפגישה' : '') + '. יום לפני אשלח לך תזכורת במייל.</p>' +
       '<p class="cs-note">צריך להזיז? <a href="book.html?r=' + encodeURIComponent(b.token) + '" style="color:#5CE1E6">לשינוי המועד</a></p>';
   }
