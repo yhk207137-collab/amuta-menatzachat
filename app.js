@@ -150,6 +150,36 @@
     v.play().catch(() => {});
   }));
 
+  // ---- "live" touches: greeting, rotating word, counters, reading progress ----
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // headline: "לגייס ___" cycles through a few endings
+  const rot = document.querySelector('[data-rot]');
+  if (rot && !calm) {
+    const words = ['הרבה יותר.', 'יותר תורמים.', 'יותר שותפים.', 'יותר כסף.'];
+    let i = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      i = (i + 1) % words.length;
+      rot.classList.add('out');
+      setTimeout(() => {
+        rot.textContent = words[i];
+        rot.classList.remove('out'); rot.classList.add('pre');
+        rot.offsetWidth; // restart the transition from below
+        rot.classList.remove('pre');
+      }, 380);
+    }, 2800);
+  }
+
+  // reading progress line under the header
+  const line = document.querySelector('.scroll-line');
+  if (line) {
+    let raf = 0;
+    const setP = () => { raf = 0; const max = document.documentElement.scrollHeight - innerHeight; line.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0); };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(setP); }, { passive: true });
+    setP();
+  }
+
   // scroll reveals (staggered inside a group)
   const io = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return;

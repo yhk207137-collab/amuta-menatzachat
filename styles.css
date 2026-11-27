@@ -252,3 +252,89 @@ body.rec-on .sticky-cta{transform:translateY(160%)}
   .who-card{grid-template-columns:260px 1fr;gap:40px}
   .who-photo{width:240px;margin:0}
 }
+
+/* ===== 2026-11 "live" pass: motion only, no new files ===== */
+
+/* logo mark: the same image twice: the body draws in, the dot drops and bounces, then hops now and then */
+.mk{position:relative;display:block;width:46px;aspect-ratio:300/221;flex:none}
+.mk img{position:absolute;inset:0;width:100%;height:100%}
+.mk-base{-webkit-mask:radial-gradient(17% 23% at 48.5% 21.7%,transparent 96%,#000 100%);mask:radial-gradient(17% 23% at 48.5% 21.7%,transparent 96%,#000 100%);
+  animation:mk-draw .7s .15s cubic-bezier(.2,1,.3,1) both}
+.mk-dot{clip-path:ellipse(17% 23% at 48.5% 21.7%);transform-origin:48.5% 44%;
+  animation:mk-drop .9s .55s cubic-bezier(.3,0,.3,1) both,mk-hop 6s 3.5s ease-in-out infinite}
+@keyframes mk-draw{from{clip-path:inset(0 0 0 100%);opacity:.3}to{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes mk-drop{0%{transform:translateY(-140%);opacity:0}45%{transform:translateY(0) scale(1.12,.86);opacity:1}62%{transform:translateY(-22%) scale(.96,1.05)}78%{transform:translateY(0) scale(1.05,.95)}90%{transform:translateY(-5%)}100%{transform:none}}
+@keyframes mk-hop{0%,84%,100%{transform:none}88%{transform:translateY(0) scale(1.1,.9)}93%{transform:translateY(-30%) scale(.95,1.06)}97%{transform:translateY(0) scale(1.06,.94)}}
+
+/* reading progress under the header, led by the logo's dot */
+.scroll-line{position:absolute;right:0;left:0;bottom:-2px;height:3px;pointer-events:none}
+.scroll-line span{position:absolute;right:0;top:0;height:100%;width:calc(var(--p,0) * 100%);background:linear-gradient(270deg,var(--teal),var(--cyan));border-radius:3px}
+.scroll-line span::after{content:"";position:absolute;left:-6px;top:50%;width:11px;height:11px;margin-top:-5.5px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 0 4px rgba(92,225,230,.25),0 0 14px rgba(92,225,230,.9);opacity:calc(var(--p,0) * 40)}
+
+/* floating dots (the logo's dot as a motif) */
+.floaters{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.floaters i{position:absolute;border-radius:50%;background:var(--cyan);opacity:.32;animation:drift 11s ease-in-out infinite}
+.floaters i:nth-child(1){width:14px;height:14px;top:12%;right:8%}
+.floaters i:nth-child(2){width:8px;height:8px;top:30%;left:10%;animation-duration:9s;animation-delay:-3s;background:var(--teal)}
+.floaters i:nth-child(3){width:22px;height:22px;top:62%;right:4%;animation-duration:13s;animation-delay:-6s;opacity:.18}
+.floaters i:nth-child(4){width:10px;height:10px;top:78%;left:18%;animation-duration:10s;animation-delay:-2s}
+.floaters i:nth-child(5){width:6px;height:6px;top:8%;left:38%;animation-duration:8s;animation-delay:-5s;background:var(--teal)}
+.floaters i:nth-child(6){width:16px;height:16px;top:46%;left:4%;animation-duration:12s;animation-delay:-8s;opacity:.2}
+.floaters i:nth-child(7){width:9px;height:9px;top:88%;right:30%;animation-duration:9.5s;animation-delay:-4s}
+.floaters i:nth-child(8){width:12px;height:12px;top:22%;right:42%;animation-duration:14s;animation-delay:-7s;opacity:.18}
+@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(-14px,-22px)}66%{transform:translate(10px,-8px)}}
+.hero{isolation:isolate}
+.final-card .floaters{z-index:0}
+.final-card .floaters i{opacity:.22}
+
+/* rotating word in the headline */
+h1 .rot{position:relative;display:block;width:fit-content}
+h1 .rot span{display:inline-block;transition:transform .45s cubic-bezier(.2,1,.3,1),opacity .35s,filter .35s}
+h1 .rot span.out{transform:translateY(-55%);opacity:0;filter:blur(4px)}
+h1 .rot span.pre{transform:translateY(55%);opacity:0;filter:blur(4px);transition:none}
+h1 .rot::after{content:"";position:absolute;right:0;bottom:-.04em;height:.09em;width:0;border-radius:9px;background:var(--cyan);opacity:.75;animation:underline 1s 1s cubic-bezier(.2,1,.3,1) forwards}
+@keyframes underline{to{width:100%}}
+
+/* button arrow nudge + trust ticks */
+.btn .arr{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(-6px)}}
+.hero-cta{flex-direction:column;align-items:center;gap:12px}
+.ticks{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:0;padding:0;font-weight:700;font-size:15px;color:var(--muted)}
+.ticks li{display:flex;align-items:center;gap:6px}
+.ticks li::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--cyan) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.2 2.2 4.8-4.9' fill='none' stroke='%230A1E3C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+
+
+/* pain: the empty till gives a little shake */
+.pain-empty.in b{display:inline-block;animation:shake .7s .55s both}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(7px) rotate(2deg)}40%{transform:translateX(-6px) rotate(-2deg)}60%{transform:translateX(4px)}80%{transform:translateX(-2px)}}
+
+/* running band */
+.ticker{margin:56px 0 0;background:var(--navy);color:#fff;overflow:hidden;transform:rotate(-1.2deg);box-shadow:0 14px 30px -18px rgba(10,30,60,.6)}
+.ticker-run{display:flex;width:max-content;animation:run 32s linear infinite}
+.ticker span{display:flex;align-items:center;gap:22px;padding:15px 0 15px 22px;font-weight:900;font-size:clamp(17px,2.4vw,22px);white-space:nowrap}
+.ticker span::after{content:"";width:11px;height:11px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px rgba(92,225,230,.8)}
+@keyframes run{to{transform:translateX(50%)}}
+.ticker:hover .ticker-run{animation-play-state:paused}
+
+/* guide list: checks pop in one after another */
+.get-list li[data-reveal]::before,.get-list li[data-reveal]::after{transform:scale(0);transition:transform .45s .25s cubic-bezier(.2,1.8,.4,1)}
+.get-list li[data-reveal]::after{transform:rotate(45deg) scale(0)}
+.get-list li.in::before{transform:scale(1)}
+.get-list li.in::after{transform:rotate(45deg) scale(1)}
+.get-list li{transition:opacity .7s ease,transform .7s cubic-bezier(.2,1,.3,1),box-shadow .25s,border-color .25s}
+.get-list li:hover{border-color:rgba(0,164,186,.35);box-shadow:0 12px 26px -18px rgba(0,164,186,.7)}
+
+/* author photo: the cyan block breathes */
+.who-photo::before{animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(-5px,-5px)}}
+
+/* sticky button: live dot */
+.sticky-cta{align-items:center;gap:10px}
+.live-dot{width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(92,225,230,.7);animation:ping 1.8s infinite}
+
+@media (prefers-reduced-motion:reduce){
+  .mk-base,.mk-dot{animation:none}
+  .ticker-run{animation:none}
+  h1 .rot::after{width:100%}
+}

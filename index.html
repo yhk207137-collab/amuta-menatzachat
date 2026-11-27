@@ -17,24 +17,26 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=who1">
+<link rel="stylesheet" href="styles.css?v=live1">
 </head>
 <body>
 
 <header class="top">
   <a class="brand" href="#" aria-label="יהושע כהן — אסטרטגיה וליווי לעמותות">
-    <img src="assets/mark.webp" alt="" width="54" height="40">
+    <span class="mk" aria-hidden="true"><img class="mk-base" src="assets/mark.webp" alt="" width="54" height="40"><img class="mk-dot" src="assets/mark.webp" alt="" width="54" height="40"></span>
     <span><b>יהושע כהן</b><small>אסטרטגיה וליווי לעמותות</small></span>
   </a>
   <a class="top-cta" href="#join">לקבלת המדריך</a>
+  <span class="scroll-line" aria-hidden="true"><span></span></span>
 </header>
 
 <main>
   <!-- HERO -->
   <section class="hero" id="top">
+    <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="hero-head">
       <p class="eyebrow"><span class="dot"></span>מדריך חינם למנהלי עמותות</p>
-      <h1>העמותה שלך יכולה לגייס <em>הרבה יותר.</em></h1>
+      <h1>העמותה שלך יכולה לגייס <em class="rot"><span data-rot>הרבה יותר.</span></em></h1>
       <p class="lead"><b>המדריך לעמותה מנצחת:</b> איך להפסיק לכבות שריפות, להפוך תורמים לשותפים אמיתיים ולבנות עמותה יציבה ומסודרת. מניסיון של 7 שנים בניהול עמותה.</p>
     </div>
 
@@ -45,7 +47,8 @@
     </div>
 
     <div class="hero-cta">
-      <a class="btn" href="#join">אני רוצה את המדריך</a>
+      <a class="btn" href="#join">אני רוצה את המדריך <span class="arr" aria-hidden="true">←</span></a>
+      <ul class="ticks"><li>חינם</li><li>ישר למייל</li></ul>
     </div>
   </section>
 
@@ -56,6 +59,12 @@
     <p class="pain-line pain-empty" data-reveal>והקופה... <b>ריקה.</b></p>
     <p class="pain-turn" data-reveal>בוא נשנה את זה!</p>
   </section>
+
+  <!-- RUNNING BAND -->
+  <div class="ticker" aria-hidden="true"><div class="ticker-run">
+    <span>להפסיק לכבות שריפות</span><span>תורמים שהופכים לשותפים</span><span>עמותה יציבה ומסודרת</span><span>חזון וכיוון ברור</span><span>יותר אמון, יותר חשיפה</span><span>השפעה גדולה</span>
+    <span>להפסיק לכבות שריפות</span><span>תורמים שהופכים לשותפים</span><span>עמותה יציבה ומסודרת</span><span>חזון וכיוון ברור</span><span>יותר אמון, יותר חשיפה</span><span>השפעה גדולה</span>
+  </div></div>
 
   <!-- WHAT'S IN THE GUIDE -->
   <section class="get">
@@ -68,7 +77,7 @@
       <li data-reveal><b>איך לבנות עמותה יציבה ומסודרת</b> שלא הכול בה נופל על הכתפיים שלך.</li>
       <li data-reveal><b>איך להפוך עשייה טובה להשפעה גדולה</b> ולהגיע הרבה מעבר למה שאתה עושה היום.</li>
     </ul>
-    <div class="get-cta" data-reveal><a class="btn" href="#join">אני רוצה את המדריך</a></div>
+    <div class="get-cta" data-reveal><a class="btn" href="#join">אני רוצה את המדריך <span class="arr" aria-hidden="true">←</span></a></div>
   </section>
 
   <!-- FOR WHOM -->
@@ -125,6 +134,7 @@
   <!-- FINAL CTA + FORM -->
   <section class="final" id="join">
     <div class="final-card">
+      <div class="floaters" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <h2>מוכן לעמותה <em>מנצחת?</em></h2>
       <p>המדריך מחכה לך. חינם, ישר למייל.</p>
     <div class="final-form">
@@ -171,8 +181,8 @@
   <p><a href="https://wa.me/972504167903" target="_blank" rel="noopener" dir="ltr">050-4167903</a></p>
 </footer>
 
-<a class="sticky-cta" href="#join" data-sticky>אני רוצה את המדריך</a>
+<a class="sticky-cta" href="#join" data-sticky><span class="live-dot" aria-hidden="true"></span>אני רוצה את המדריך</a>
 
-<script src="app.js?v=recs2"></script>
+<script src="app.js?v=live1"></script>
 </body>
 </html>
