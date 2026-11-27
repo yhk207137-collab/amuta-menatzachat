@@ -17,7 +17,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/heebo-hebrew-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=book1">
+<link rel="stylesheet" href="styles.css?v=recs2">
 </head>
 <body>
 
@@ -94,6 +94,30 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS (add a card to the list to add a video) -->
+  <section class="recs" aria-labelledby="recs-title">
+    <p class="recs-kicker" data-reveal>ממליצים</p>
+    <h2 class="sec-title" id="recs-title" data-reveal>מה אומרים <em>מי שעבדו איתי</em></h2>
+    <ul class="recs-list" data-recs data-reveal>
+      <li class="rec">
+        <button class="rec-play" type="button" data-src="assets/video/rec1.mp4" aria-label="לצפייה בהמלצה של שלמה טרויבע">
+          <img src="assets/video/rec1.webp" alt="" width="540" height="960" loading="lazy">
+          <span class="rec-icon" aria-hidden="true"></span>
+        </button>
+        <p class="rec-quote">״האסטרטג מספר אחד״</p>
+        <p class="rec-who"><b>שלמה טרויבע</b> · מנהל עמותת מחיה נפשות</p>
+      </li>
+      <li class="rec">
+        <button class="rec-play" type="button" data-src="assets/video/rec2.mp4" aria-label="לצפייה בהמלצה של מאיר בידר">
+          <img src="assets/video/rec2.webp" alt="" width="540" height="960" loading="lazy">
+          <span class="rec-icon" aria-hidden="true"></span>
+        </button>
+        <p class="rec-quote">״יהושע זה הדרך!״</p>
+        <p class="rec-who"><b>מאיר בידר</b> · מגייס כספים</p>
+      </li>
+    </ul>
+  </section>
+
   <!-- FINAL CTA + FORM -->
   <section class="final" id="join">
     <div class="final-card">
@@ -145,6 +169,6 @@
 
 <a class="sticky-cta" href="#join" data-sticky>אני רוצה את המדריך</a>
 
-<script src="app.js?v=order1"></script>
+<script src="app.js?v=recs2"></script>
 </body>
 </html>

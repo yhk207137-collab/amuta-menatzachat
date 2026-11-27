@@ -134,6 +134,22 @@
     setTimeout(() => { if (!form.hidden) nameIn.focus({ preventScroll: true }); }, 600);
   }));
 
+  // testimonial videos: load on first click, play inline, only one at a time
+  document.querySelectorAll('.rec-play').forEach(btn => btn.addEventListener('click', () => {
+    const card = btn.closest('.rec');
+    if (card.classList.contains('playing')) return;
+    document.querySelectorAll('.rec.playing video').forEach(v => v.pause());
+    const v = document.createElement('video');
+    v.src = btn.dataset.src; v.poster = btn.querySelector('img').src;
+    v.controls = true; v.playsInline = true; v.setAttribute('playsinline', '');
+    const frame = document.createElement('div');
+    frame.className = 'rec-frame'; frame.appendChild(v);
+    btn.replaceWith(frame); card.classList.add('playing');
+    v.addEventListener('play', () => { document.body.classList.add('rec-on'); document.querySelectorAll('.rec video').forEach(o => o !== v && o.pause()); });
+    v.addEventListener('pause', () => { if (![...document.querySelectorAll('.rec video')].some(o => !o.paused)) document.body.classList.remove('rec-on'); });
+    v.play().catch(() => {});
+  }));
+
   // scroll reveals (staggered inside a group)
   const io = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return;
